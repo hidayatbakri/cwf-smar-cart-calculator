@@ -14,8 +14,9 @@ function calculateSubtotal(items) {
     const isQuantityError = validationQuantityError(item.qty);
     if (isQuantityError) {
       console.log("Error quantity", item.qty);
+    } else {
+      subTotal += item.price * item.qty;
     }
-    subTotal += item.price * item.qty;
     return;
   });
 
@@ -37,7 +38,7 @@ function calculateTotal(subtotal, tax) {
 }
 
 const items = [
-  { name: "Fish A", price: 10, qty: 2 },
+  { name: "Fish A", price: 10, qty: -2 },
   { name: "Fish B", price: 5, qty: 4 },
 ];
 
