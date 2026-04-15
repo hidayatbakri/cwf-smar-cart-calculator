@@ -1,7 +1,8 @@
-function validationQuantity(qty) {
+function validationQuantityError(qty) {
   if (qty < 0) {
-    return console.log("Quantity tidak boleh kurang dari 0");
+    return true;
   }
+  return false;
 }
 
 function calculateSubtotal(items) {
@@ -10,7 +11,10 @@ function calculateSubtotal(items) {
   const requirementSubTotalDisc = 50;
 
   items.map((item) => {
-    validationQuantity(item.qty);
+    const isQuantityError = validationQuantityError(item.qty);
+    if (isQuantityError) {
+      console.log("Error quantity", item.qty);
+    }
     subTotal += item.price * item.qty;
     return;
   });
@@ -19,7 +23,7 @@ function calculateSubtotal(items) {
     discount = subTotal * 0.1;
   }
 
-  return subTotal - discount;
+  return [subTotal - discount, discount];
 }
 
 function calculateTax(subTotal) {
@@ -33,63 +37,71 @@ function calculateTotal(subtotal, tax) {
 }
 
 const items = [
-  { name: "Fish A", price: 10, qty: 4 },
+  { name: "Fish A", price: 10, qty: 2 },
   { name: "Fish B", price: 5, qty: 4 },
 ];
 
-const subTotal = calculateSubtotal(items);
+const [subTotal, discount] = calculateSubtotal(items);
 const tax = calculateTax(subTotal);
 const total = calculateTotal(subTotal, tax);
+
+console.log("=========================\n");
+console.log("  Smart Cart Calculator\n");
+console.log("=========================\n");
+console.log(`Diskon: -${discount}`);
 console.log(`Sub Total: ${subTotal}`);
 console.log(`Tax (11%): ${tax}`);
 console.log(`Total: ${total}`);
 
-// const buttonAddNewData = document.getElementById("addNewData");
-// const elementLocation = document.getElementById("elementLocation");
-
-// buttonAddNewData.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   elementLocation.innerHTML += `
-//     <div class="grid md:grid-cols-2 gap-4 mb-3">
-//             <div class="form-group flex flex-col gap-2 col-span-2">
-//               <label for="name" class="text-slate-800">Nama:</label>
-//               <input
-//                 type="text"
-//                 class="outline -outline-offset-2 outline-gray-400 p-2 rounded"
-//                 placeholder="Masukkan Nama"
-//                 id="name"
-//                 required
-//               />
-//             </div>
-//             <div class="form-group flex flex-col gap-2">
-//               <label for="price" class="text-slate-800">Harga:</label>
-//               <input
-//                 type="number"
-//                 class="outline -outline-offset-2 outline-gray-400 p-2 rounded"
-//                 placeholder="Masukkan Harga"
-//                 id="price"
-//                 required
-//               />
-//             </div>
-//             <div class="form-group flex flex-col gap-2">
-//               <label for="qty" class="text-slate-800">Quantity:</label>
-//               <input
-//                 type="number"
-//                 class="outline -outline-offset-2 outline-gray-400 p-2 rounded"
-//                 placeholder="Masukkan Quantity"
-//                 id="qty"
-//                 required
-//               />
-//             </div>
-//           </div>
-//   `;
-// });
+// === UI
 
 const form = document.getElementById("form");
+const names = document.querySelectorAll("input.name");
+const quantities = document.querySelectorAll("input.qty");
+const prices = document.querySelectorAll("input.price");
+
+const setSubTotal = document.getElementById("setSubTotal");
+const setDiscount = document.getElementById("setDiscount");
+const setTax = document.getElementById("setTax");
+const setTotal = document.getElementById("setTotal");
+
 form.addEventListener("submit", (e) => {
-  const names = document.querySelectorAll("input.name");
   e.preventDefault();
-  names.forEach((val, key) => {
-    console.log(val.value);
-  });
+
+  data = [];
+
+  const isQuantityError = quantities.forEach((qty) =>
+    validationQuantityError(qty.value),
+  );
+
+  // console.log(Math.max(names.length, quantities.length, prices.length));
+
+  if (isQuantityError) {
+    return;
+  } else {
+    for (let i = 0; i < names.length; i++) {
+      data.push({
+        name: names[i].value,
+        qty: quantities[i].value,
+        price: prices[i].value,
+      });
+    }
+
+    const [subTotal, discount] = calculateSubtotal(data);
+    const tax = calculateTax(subTotal);
+    const total = calculateTotal(subTotal, tax);
+
+    setSubTotal.innerHTML = subTotal;
+    setDiscount.innerHTML = discount;
+    setTax.innerHTML = tax;
+    setTotal.innerHTML = total;
+
+    // console.log("=========================\n");
+    // console.log("  Smart Cart Calculator\n");
+    // console.log("=========================\n");
+    // console.log(`Diskon: -${discount}`);
+    // console.log(`Sub Total: ${subTotal}`);
+    // console.log(`Tax (11%): ${tax}`);
+    // console.log(`Total: ${total}`);
+  }
 });

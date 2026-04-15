@@ -82,13 +82,6 @@
         </div>
 
         <div class="flex justify-end my-5 gap-5">
-          <!-- <button
-            id="addNewData"
-            type="button"
-            class="bg-gray-600 text-white px-5 py-2 rounded cursor-pointer hover:bg-gray-700 ease-in duration-150"
-          >
-            Tambah Data
-          </button> -->
           <button
             class="bg-blue-600 text-white px-5 py-2 rounded cursor-pointer hover:bg-blue-700 ease-in duration-150"
           >
@@ -98,7 +91,30 @@
       </form>
 
       <div class="bg-blue-100/50 p-5 mt-10">
-        <h1 class="font-medium">Hasil Perhitungan</h1>
+        <h1 class="font-bold">Hasil Perhitungan</h1>
+
+        <table class="my-6">
+          <tr>
+            <td class="text-sm py-2 w-40">Sub Total</td>
+            <td class="text-sm py-2 w-10">:</td>
+            <td class="text-sm py-2" id="setSubTotal"></td>
+          </tr>
+          <tr>
+            <td class="text-sm py-2">Diskon</td>
+            <td class="text-sm py-2">:</td>
+            <td class="text-sm py-2" id="setDiscount"></td>
+          </tr>
+          <tr>
+            <td class="text-sm py-2">Pajak</td>
+            <td class="text-sm py-2">:</td>
+            <td class="text-sm py-2" id="setTax"></td>
+          </tr>
+          <tr>
+            <td class="text-sm py-2">Total</td>
+            <td class="text-sm py-2">:</td>
+            <td class="text-sm py-2" id="setTotal"></td>
+          </tr>
+        </table>
       </div>
     </div>
 
