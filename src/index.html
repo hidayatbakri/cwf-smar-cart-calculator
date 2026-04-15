@@ -90,10 +90,46 @@
         </div>
       </form>
 
-      <div class="bg-blue-100/50 p-5 mt-10">
+      <div class="card p-5 rounded shadow-lg">
+        <h1 class="font-semibold text-slate-600">Detail Pembayaran</h1>
+          <div id="setItemsDetail"></div>
+          <table class="w-full my-6">
+          
+          <tr>
+            <td class="text-end   text-sm py-2">Sub Total (Sebelum Diskon)</td>
+            <td class=" text-center  text-sm py-2 w-10">:</td>
+            <td class=" text-end  text-sm py-2" id="setSubTotal"></td>
+          </tr>
+          <tr>
+            <td class="text-end   text-sm py-2">Diskon</td>
+            <td class=" text-center  text-sm py-2">:</td>
+            <td class=" text-end  text-sm py-2" id="setDiscount"></td>
+          </tr>
+          <tr>
+            <td class="text-end   text-sm py-2">Sub Total</td>
+            <td class=" text-center  text-sm py-2 w-10">:</td>
+            <td class=" text-end  text-sm py-2" id="setSubTotalDiscount"></td>
+          </tr>
+          <tr>
+            <td class="text-end   text-sm py-2">Pajak</td>
+            <td class=" text-center  text-sm py-2">:</td>
+            <td class=" text-end  text-sm py-2" id="setTax"></td>
+          </tr>
+          <tr>
+            <td class="text-end   text-sm py-2">Total</td>
+            <td class=" text-center  text-sm py-2">:</td>
+            <td class="w-60 text-end  text-sm py-2" id="setTotal">1</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- <div class="bg-blue-100/50 p-5 mt-10">
         <h1 class="font-bold">Hasil Perhitungan</h1>
 
         <table class="my-6">
+          <tr>
+
+          </tr>
           <tr>
             <td class="text-sm py-2 w-40">Sub Total</td>
             <td class="text-sm py-2 w-10">:</td>
@@ -116,9 +152,9 @@
           </tr>
         </table>
       </div>
-    </div>
+    </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../main.js"></script>
+    <script src="../main.js" type="module"></script>
   </body>
 </html>
